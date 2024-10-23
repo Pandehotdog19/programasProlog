@@ -34,4 +34,22 @@ run_programa5: programa5.pl
 run_programa6: programa6.pl
 	swipl -s programa6.pl -g "programa6([a, b, c, b, a]), write('La lista es un palíndromo: true'), nl, halt."
 
-# Regla para ejecutar programa
+# Regla para ejecutar programa7
+run_programa7: programa7.pl
+	swipl -s programa7.pl -g "programa7([1, [2, 3], 4, [5, [6, 7]]], Flat), write('Lista aplanada: '), write(Flat), nl, halt."
+
+# Regla para ejecutar programa8
+run_programa8: programa8.pl
+	swipl -s programa8.pl -g "programa8([a, a, b, b, c, a, a, d], R), write('Lista sin duplicados consecutivos: '), write(R), nl, halt."
+
+# Regla para ejecutar programa9
+run_programa9: programa9.pl
+	swipl -s programa9.pl -g "programa9([a, a, b, b, c, a, a, d], R), write('Lista agrupada: '), write(R), nl, halt."
+
+# Regla para ejecutar programa11
+run_programa11: programa11.pl
+	swipl -s programa11.pl -g "programa11([a, a, b, c, c, a, d], R), write('Lista modificada: '), write(R), nl, halt."
+
+# Limpiar archivos compilados (en caso de que existan)
+clean:
+	rm -f *.o
