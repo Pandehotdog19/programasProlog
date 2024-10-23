@@ -4,11 +4,13 @@
 
 # Lista de programas Prolog
 PROLOG_FILES = programa1.pl programa2.pl programa3.pl programa4.pl programa5.pl \
-               programa6.pl programa7.pl programa8.pl programa9.pl programa11.pl
+               programa6.pl programa7.pl programa8.pl programa9.pl programa11.pl \
+               programa12.pl
 
 # Objetivo por defecto: compilar y ejecutar todos los programas
 all: run_programa1 run_programa2 run_programa3 run_programa4 run_programa5 \
-     run_programa6 run_programa7 run_programa8 run_programa9 run_programa11
+     run_programa6 run_programa7 run_programa8 run_programa9 run_programa11 \
+     run_programa12
 
 # Regla para ejecutar programa1
 run_programa1: programa1.pl
@@ -49,6 +51,10 @@ run_programa9: programa9.pl
 # Regla para ejecutar programa11
 run_programa11: programa11.pl
 	swipl -s programa11.pl -g "programa11([a, a, b, c, c, a, d], R), write('Lista modificada: '), write(R), nl, halt."
+
+# Regla para ejecutar programa12
+run_programa12: programa12.pl
+	swipl -s programa12.pl -g "programa12([[2,a], [1,b], [3,c], [1,a], [2,d]], R), write('Lista decodificada: '), write(R), nl, halt."
 
 # Limpiar archivos compilados (en caso de que existan)
 clean:
