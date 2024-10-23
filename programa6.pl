@@ -41,9 +41,14 @@
 % }
 % ----------------------------------------------
 
+% Predicado reverse_list/2 que invierte una lista.
+reverse_list([], []). % Caso base: la lista vacía es su propia inversa.
+reverse_list([H|T], R) :- 
+    reverse_list(T, RevT), % Invierte la cola de la lista.
+    append(RevT, [H], R).    % Agrega la cabeza al final de la lista invertida.
+
 % Predicado programa6(L) que verifica si la lista L
 % es un palíndromo.
-
 programa6(L) :- reverse_list(L, L). % Verifica si la lista es igual a su inversa.
 
 % Ejemplo de uso:
