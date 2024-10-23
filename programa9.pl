@@ -3,7 +3,6 @@
 % Fecha: 21 de octubre de 2024
 % Descripción: Programa en Prolog que agrupa 
 %              duplicados consecutivos de una lista
-%              en sublistas.
 % ===============================================
 
 % -------- Código en C# (comentado) ------------
@@ -45,7 +44,7 @@
 % 
 %         foreach (var grupo in listaAgrupada)
 %         {
-%             Console.WriteLine("[" + string.Join(", ", grupo) + "]");
+%             Console.WriteLine("[" + string.Join(", ", grupo) + "]"); 
 %         }
 %     }
 % }
@@ -57,12 +56,12 @@
 programa9([], []).
 
 % Caso recursivo: transfiere todos los elementos consecutivos iguales a una sublista.
-programa9([X|Xs], [[X|Ys]|Zs]) :- 
-    transfer(X, Xs, Ys, Rest), 
+programa9([H|T], [[H|Ys]|Zs]) :- 
+    transfer(H, T, Ys, Rest), 
     programa9(Rest, Zs).
 
 % Transfiere los elementos duplicados consecutivos a una sublista.
-transfer(X, [], [], []). % Caso base: no hay más elementos.
+transfer(_, [], [], []). % Caso base: no hay más elementos.
 % Si el siguiente elemento es diferente, termina la transferencia.
 transfer(X, [Y|Ys], [], [Y|Ys]) :- 
     X \= Y.
