@@ -5,12 +5,12 @@
 # Lista de programas Prolog
 PROLOG_FILES = programa1.pl programa2.pl programa3.pl programa4.pl programa5.pl \
                programa6.pl programa7.pl programa8.pl programa9.pl programa11.pl \
-               programa12.pl
+               programa12.pl programa13.pl programa14.pl programa15.pl
 
 # Objetivo por defecto: compilar y ejecutar todos los programas
 all: run_programa1 run_programa2 run_programa3 run_programa4 run_programa5 \
      run_programa6 run_programa7 run_programa8 run_programa9 run_programa11 \
-     run_programa12
+     run_programa12 run_programa13 run_programa14 run_programa15
 
 # Regla para ejecutar programa1
 run_programa1: programa1.pl
@@ -55,6 +55,18 @@ run_programa11: programa11.pl
 # Regla para ejecutar programa12
 run_programa12: programa12.pl
 	swipl -s programa12.pl -g "programa12([[2,a], [1,b], [3,c], [1,a], [2,d]], R), write('Lista decodificada: '), write(R), nl, halt."
+
+# Regla para ejecutar programa13
+run_programa13: programa13.pl
+	swipl -s programa13.pl -g "programa13([a,a,a,b,c,c,a], R), write('Lista codificada: '), write(R), nl, halt."
+
+# Regla para ejecutar programa14
+run_programa14: programa14.pl
+	swipl -s programa14.pl -g "programa14([1, 2, 3], R), write('Lista duplicada: '), write(R), nl, halt."
+
+# Regla para ejecutar programa15
+run_programa15: programa15.pl
+	swipl -s programa15.pl -g "programa15([1, 2, 3], 2, R), write('Lista duplicada 2 veces: '), write(R), nl, halt."
 
 # Limpiar archivos compilados (en caso de que existan)
 clean:
