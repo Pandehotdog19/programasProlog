@@ -48,7 +48,7 @@ run_programa9: programa9.pl
 
 # Regla para ejecutar programa10
 run_programa10: programa10.pl
-	swipl -s programa10.pl -g "programa10([a, a, b, b, c, a, a, d], R), write('Lista codificada: '), write(R), nl, halt."
+	swipl -s programa10.pl -g "transform([[a, a], [b, b], [c], [a, a], [d]], R)., write('Lista codificada: '), write(R), nl, halt."
 
 # Limpiar archivos compilados (en caso de que existan)
 clean:
