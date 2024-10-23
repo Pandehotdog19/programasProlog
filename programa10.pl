@@ -57,6 +57,12 @@ programa10(L, R) :-
     pack(L, P), 
     transform(P, R).
 
+% Agrupa elementos consecutivos en sublistas.
+pack([], []).
+pack([X|Xs], [[X|Ys]|Zs]) :- 
+    append(Ys, [X], Xs),
+    pack(Xs, [Ys|Zs]).
+
 % Transforma sublistas en parejas (N, X), donde N es la cantidad de elementos.
 transform([], []).
 transform([[X|Xs]|Ys], [[N,X]|Zs]) :- 
