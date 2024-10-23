@@ -79,9 +79,10 @@ programa11(L, R) :-
 
 % Encoded Run-Length: codifica la lista en forma de (Count, Element).
 encode([], []).
-encode([X|Xs], [[Count, X]|Encoded]) :-
+encode([X|Xs], Encoded) :- 
     count(X, Xs, Count, Rest),
-    encode(Rest, Encoded).
+    (Count > 1 -> Encoded = [[Count, X]|RestEncoded]; Encoded = [X|RestEncoded]),
+    encode(Rest, RestEncoded).
 
 % Cuenta los elementos repetidos.
 count(X, [], 1, []).
