@@ -38,14 +38,25 @@
 
 % -------- Código en Prolog --------------------
 
-% Verifica si un número entero dado es primo.
-programa30(2).  % 2 es primo.
-programa30(3).  % 3 es primo.
-programa30(P) :- P > 3, P mod 2 =\= 0, \\+ has_factor(P, 3).  % Comprueba si P no tiene factores.
+% Verifica si un número es primo
+es_primo(2). % 2 es primo
+es_primo(N) :-
+    N > 2,
+    \+ (between(2, sqrt(N), X), N mod X =:= 0).
 
-% Verifica si un número tiene factores.
-has_factor(N, L) :- N mod L =:= 0.  % Si N es divisible por L, tiene factores.
-has_factor(N, L) :- L * L < N, L2 is L + 2, has_factor(N, L2).  % Verifica factores impares.
+% Punto de entrada para el programa
+programa30(N) :-
+    (es_primo(N) ->
+        write('Es primo: true')
+    ;
+        write('Es primo: false')
+    ).
+
+% Ejemplo de uso:
+% ?- programa30(29).
+% Es primo: true
+% ?- programa30(30).
+% Es primo: false
 
 % Ejemplo de uso:
 % ?- programa30(29).
