@@ -72,6 +72,7 @@
 % }
 % ----------------------------------------------
 
+% -------- Código en Prolog --------------------
 
 % combination(N, List, Comb) - Encuentra una combinación de tamaño N en la lista List.
 combination(0, _, []).  % Caso base: una combinación de tamaño 0 es la lista vacía.
