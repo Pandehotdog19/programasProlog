@@ -12,23 +12,24 @@ programa10(L, R) :-
     transform(P, R).
 
 % Agrupa elementos consecutivos en sublistas.
-pack([], []).
+pack([], []). % Caso base para lista vacía.
 pack([H|T], [[H|Group]|Rest]) :- 
-    take_while(T, H, Group, Rest).
+    take_while(T, H, Group, NewRest), % Modificamos para que devuelva también el resto de la lista.
+    pack(NewRest, Rest). % Llamada recursiva para procesar el resto.
 
-% Toma elementos mientras cumplan la condición.
-take_while([], _, [], []).
-take_while([H|T], H, [H|Group], Rest) :- 
-    take_while(T, H, Group, Rest).
-take_while([H|T], X, [], [H|T]) :- 
-    H \= X.
+% Toma elementos mientras cumplan la condición (son iguales).
+take_while([], _, [], []). % Caso base: si no hay más elementos.
+take_while([H|T], H, [H|Group], Rest) :- % Si el elemento es igual al anterior, agrúpalo.
+    take_while(T, H, Group, Rest). % Continua agrupando.
+take_while([H|T], X, [], [H|T]) :- % Cuando cambia el elemento, corta la agrupación.
+    H \= X. % Los elementos no son iguales.
 
 % Transforma sublistas en parejas (N, X), donde N es la cantidad de elementos.
-transform([], []).
+transform([], []). % Caso base para listas vacías.
 transform([[X|Xs]|Ys], [[N,X]|Zs]) :- 
-    length([X|Xs], N), 
-    transform(Ys, Zs).
-
+    length([X|Xs], N),  % Calcula la longitud de la sublista.
+    transform(Ys, Zs).  % Aplica recursivamente al resto de las sublistas.
+    
 % Ejemplo de uso:
 % ?- programa10([a, a, b, b, c, a, a, d], R).
 % R = [[2, a], [2, b], [1, c], [2, a], [1, d]].
