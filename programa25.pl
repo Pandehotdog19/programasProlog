@@ -63,6 +63,13 @@ rnd_select(L, N, [X|R]) :-
     N1 is N - 1,               % Decrementa N.
     rnd_select(L1, N1, R).     % Llama recursivamente para seleccionar el resto.
 
+% Obtiene el elemento en la posición I de la lista L.
+element_at(X, [X|_], 1).  % Si el índice es 1, el primer elemento es X.
+element_at(X, [_|T], I) :- 
+    I > 1,                    % Asegúrate de que I sea mayor que 1.
+    I1 is I - 1,              % Decrementa I.
+    element_at(X, T, I1).     % Busca recursivamente en la cola de la lista.
+
 % Ejemplo de uso:
 % ?- programa25([1, 2, 3, 4, 5], P).
 % P = [X1, X2, X3, X4, X5].  (donde X1, X2, ..., X5 son los elementos en un orden aleatorio).
