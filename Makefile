@@ -48,7 +48,7 @@ run_programa11: programa11.pl
 	swipl -s programa11.pl -g "programa11([a, a, b, c, c, a, d], R), write('Lista modificada: '), write(R), nl, halt."
 
 run_programa13: programa13.pl
-	swipl -s programa13.pl -g "programa13([1, 2, 3], R), write('Lista codificada: '), write(R), nl, halt."
+	swipl -s programa13.pl -g "programa13([a, a, b, b, c, c, a], R), write('Lista codificada: '), write(R), nl, halt."
 
 run_programa14: programa14.pl
 	swipl -s programa14.pl -g "programa14([1, 2, 3], R), write('Lista duplicada: '), write(R), nl, halt."
@@ -57,12 +57,35 @@ run_programa15: programa15.pl
 	swipl -s programa15.pl -g "programa15([1, 2, 3], 2, R), write('Lista duplicada 2 veces: '), write(R), nl, halt."
 
 run_programa16: programa16.pl
-	swipl -s programa16.pl -g "programa16([a, b, c, d], N), write('Lista con elementos eliminados: '), write(N), nl, halt."
+	swipl -s programa16.pl -g "programa16([a, b, c, d, e, f, g, h, i, j], 3, R), write('Lista sin cada 3-esimo elemento: '), write(R), nl, halt."
 
 run_programa17: programa17.pl
-	swipl -s programa17.pl -g "programa17([1, 2, 3, 4, 5], L1, L2), write('Lista dividida: '), write(L1), write(', '), write(L2), nl, halt."
+	swipl -s programa17.pl -g "programa17([1, 2, 3, 4, 5, 6], 3, L1, L2), write('Primera parte: '), write(L1), nl, write('Segunda parte: '), write(L2), nl, halt."
 
 run_programa18: programa18.pl
-	swipl -s programa18.pl -g "programa18([a, b, c, d, e], 2, R), write('Sublista: '), write(R), nl, halt."
+	swipl -s programa18.pl -g "programa18([a, b, c, d, e, f], 2, 4, R), write('Porción de la lista: '), write(R), nl, halt."
 
 run_programa19: programa19.pl
+	swipl -s programa19.pl -g "programa19([1, 2, 3, 4, 5], 2, R), write('Lista rotada: '), write(R), nl, halt."
+
+run_programa20: programa20.pl
+	swipl -s programa20.pl -g "programa20(X, [1, 2, 3, 4, 5], 3, R), write('Elemento eliminado: '), write(R), nl, halt."
+
+run_programa21: programa21.pl
+	swipl -s programa21.pl -g "programa21(3, [1, 2, 4, 5], 3, R), write('Lista después de insertar: '), write(R), nl, halt."
+
+run_programa22: programa22.pl
+	swipl -s programa22.pl -g "programa22(1, 5, R), write('Lista en rango: '), write(R), nl, halt."
+
+run_programa23: programa23.pl
+	swipl -s programa23.pl -g "programa23([1, 2, 3, 4, 5], 2, R), write('Elementos aleatorios: '), write(R), nl, halt."
+
+run_programa24: programa24.pl
+	swipl -s programa24.pl -g "programa24(1, 5, R), write('Números aleatorios en rango: '), write(R), nl, halt."
+
+run_programa25: programa25.pl
+	swipl -s programa25.pl -g "programa25([1, 2, 3, 4, 5], P), write('Permutación aleatoria: '), write(P), nl, halt."
+
+# Limpiar archivos compilados (en caso de que existan)
+clean:
+	rm -f *.o
