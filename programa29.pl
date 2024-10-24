@@ -62,6 +62,11 @@ programa29(L, F) :-
     msort(P, SP),                     % Ordena los pares por la longitud.
     encode(SP, F).                    % Codifica la frecuencia de las longitudes.
 
+% Codifica la frecuencia de las longitudes de las sublistas.
+encode([], []).  % Caso base: lista vacía.
+encode([Key-Count | T], [[Count, Key] | EncodedTail]) :-
+    encode(T, EncodedTail).
+
 % Ejemplo de uso:
 % ?- programa29([[1, 2], [1, 2, 3, 4], [1], [1, 2, 3]], F).
 % F = [[1, 1], [2, 2], [4, 1]].
