@@ -66,25 +66,3 @@ run_programa18: programa18.pl
 	swipl -s programa18.pl -g "programa18([a, b, c, d, e], 2, R), write('Sublista: '), write(R), nl, halt."
 
 run_programa19: programa19.pl
-	swipl -s programa19.pl -g "programa19([1, 2, 3, 4, 5], 2, R), write('Rango extraído: '), write(R), nl, halt."
-
-run_programa20: programa20.pl
-	swipl -s programa20.pl -g "programa20([1, 2, 3, 4, 5], 2, R), write('Lista sin el k-ésimo elemento: '), write(R), nl, halt."
-
-run_programa21: programa21.pl
-	swipl -s programa21.pl -g "programa21([a, b, c, d, e], R), write('Lista con elementos duplicados: '), write(R), nl, halt."
-
-run_programa22: programa22.pl
-	swipl -s programa22.pl -g "programa22([1, 2, 3, 4, 5], R), write('Lista de elementos únicos: '), write(R), nl, halt."
-
-run_programa23: programa23.pl
-	swipl -s programa23.pl -g "programa23([1, 2, 3, 4, 5], 2, R), write('Elementos seleccionados aleatoriamente: '), write(R), nl, halt."
-
-run_programa24: programa24.pl
-	swipl -s programa24.pl -g "lotto(3, 5, L), write('Números aleatorios en rango: '), write(L), nl, halt."
-
-run_programa25: programa25.pl
-	swipl -s programa25.pl -g "programa25([1, 2, 3, 4, 5], R), write('Resultado del programa 25: '), write(R), nl, halt."
-
-clean:
-	rm -f *.o *.pl~
