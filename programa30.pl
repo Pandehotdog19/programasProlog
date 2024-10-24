@@ -39,24 +39,16 @@
 % -------- Código en Prolog --------------------
 
 % Verifica si un número es primo
-es_primo(2). % 2 es primo
+es_primo(2).
 es_primo(N) :-
     N > 2,
     \+ (between(2, sqrt(N), X), N mod X =:= 0).
 
-% Punto de entrada para el programa
 programa30(N) :-
     (es_primo(N) ->
-        write('Es primo: true')
-    ;
+        write('Es primo: true');
         write('Es primo: false')
     ).
-
-% Ejemplo de uso:
-% ?- programa30(29).
-% Es primo: true
-% ?- programa30(30).
-% Es primo: false
 
 % Ejemplo de uso:
 % ?- programa30(29).
