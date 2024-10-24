@@ -101,7 +101,7 @@ run_programa29: programa29.pl
 	swipl -s programa29.pl -g "programa29([[1, 2], [1, 2, 3, 4], [1], [1, 2, 3]], F), write('Frecuencia de longitudes: '), write(F), nl, halt."
 
 run_programa30: programa30.pl
-	swipl -s programa30.pl -g "programa30(29), write('Es primo: true'), nl, halt."  # Ejemplo de uso del programa30
+	swipl -s programa30.pl -g "programa30(29), nl, halt."  # Ejemplo de uso del programa30
 
 # Limpiar archivos compilados (en caso de que existan)
 clean:
