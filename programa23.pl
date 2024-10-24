@@ -7,7 +7,47 @@
 % ===============================================
 
 % -------- Código en C# (comentado) ------------
-% ... [tu código en C# aquí] ...
+% using System;
+% using System.Collections.Generic;
+% using System.Linq;
+% 
+% class Program
+% {
+%     // Función que obtiene el elemento en la posición I de la lista.
+%     static T ElementAt<T>(List<T> list, int index)
+%     {
+%         return list[index]; // Retorna el elemento en el índice dado.
+%     }
+% 
+%     // Función que extrae N elementos aleatorios de una lista.
+%     static List<T> RandomSelect<T>(List<T> list, int n)
+%     {
+%         Random random = new Random(); // Crea un generador de números aleatorios.
+%         List<T> selected = new List<T>(); // Lista para almacenar los elementos seleccionados.
+%         List<T> tempList = new List<T>(list); // Copia la lista original.
+% 
+%         for (int i = 0; i < n; i++) // Repite N veces.
+%         {
+%             if (tempList.Count == 0) break; // Sale si la lista está vacía.
+%             
+%             int index = random.Next(tempList.Count); // Selecciona un índice aleatorio.
+%             selected.Add(tempList[index]); // Añade el elemento seleccionado a la lista de resultados.
+%             tempList.RemoveAt(index); // Elimina el elemento seleccionado de la lista temporal.
+%         }
+% 
+%         return selected; // Retorna la lista de elementos seleccionados.
+%     }
+% 
+%     // Función principal que genera N números aleatorios de una lista.
+%     static void Main()
+%     {
+%         List<int> numbers = new List<int> { 1, 2, 3, 4, 5 }; // Lista de números.
+%         int N = 2; // Cantidad de números aleatorios a extraer.
+%         List<int> selected = RandomSelect(numbers, N); // Extrae N elementos aleatorios.
+%         
+%         Console.WriteLine(string.Join(", ", selected)); // Muestra los números seleccionados.
+%     }
+% }
 % ----------------------------------------------
 
 % -------- Código en Prolog --------------------
