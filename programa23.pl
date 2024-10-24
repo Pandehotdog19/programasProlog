@@ -7,46 +7,20 @@
 % ===============================================
 
 % -------- Código en C# (comentado) ------------
-% using System;
-% using System.Collections.Generic;
-% using System.Linq;
-% 
-% class Program
-% {
-%     // Función que extrae N elementos aleatorios de una lista.
-%     static List<T> RandomSelect<T>(List<T> list, int n)
-%     {
-%         Random random = new Random(); // Crea un generador de números aleatorios.
-%         List<T> selected = new List<T>(); // Lista para almacenar los elementos seleccionados.
-%         List<T> tempList = new List<T>(list); // Copia la lista original.
-% 
-%         for (int i = 0; i < n; i++) // Repite N veces.
-%         {
-%             if (tempList.Count == 0) break; // Sale si la lista está vacía.
-%             
-%             int index = random.Next(tempList.Count); // Selecciona un índice aleatorio.
-%             selected.Add(tempList[index]); // Añade el elemento seleccionado a la lista de resultados.
-%             tempList.RemoveAt(index); // Elimina el elemento seleccionado de la lista temporal.
-%         }
-% 
-%         return selected; // Retorna la lista de elementos seleccionados.
-%     }
-% 
-%     static void Main()
-%     {
-%         List<int> lista = new List<int> { 1, 2, 3, 4, 5 }; // Lista de enteros.
-%         List<int> seleccionados = RandomSelect(lista, 2); // Extrae 2 elementos aleatorios.
-%         
-%         Console.WriteLine(string.Join(", ", seleccionados)); // Muestra los elementos seleccionados.
-%     }
-% }
+% ... [tu código en C# aquí] ...
 % ----------------------------------------------
 
 % -------- Código en Prolog --------------------
 
+% Obtiene el elemento en la posición I de la lista L.
+element_at(X, [X|_], 1). % Si la posición es 1, el primer elemento es X.
+element_at(X, [_|T], I) :- 
+    I > 1, 
+    I1 is I - 1, 
+    element_at(X, T, I1). % Recurre en la cola de la lista con posición decreciente.
+
 % Extrae un número dado de elementos aleatorios de una lista.
 % Utiliza un generador de números aleatorios y elimina los elementos seleccionados.
-
 programa23(_, 0, []).  % Caso base: si N es 0, la lista resultante es vacía.
 programa23(L, N, [X|R]) :- 
     length(L, Len),            % Obtiene la longitud de la lista.
