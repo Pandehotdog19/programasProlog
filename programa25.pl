@@ -48,20 +48,20 @@
 % Genera una permutación aleatoria de los elementos de una lista.
 % Utiliza la selección aleatoria para construir la permutación.
 programa25(L, P) :- 
-    length(L, Len),     % Obtiene la longitud de la lista.
-    Len > 0,            % Asegura que la lista no esté vacía.
-    rnd_select(L, Len, P). % Selecciona todos los elementos de la lista aleatoriamente.
+    length(L, Len),        % Obtiene la longitud de la lista.
+    Len > 0,               % Asegura que la lista no esté vacía.
+    MaxIndex is Len + 1,   % Calcula el límite superior para el índice aleatorio.
+    rnd_select(L, Len, P, MaxIndex). % Selecciona todos los elementos de la lista aleatoriamente.
 
 % Extrae un número dado de elementos aleatorios de una lista.
 % Utiliza un generador de números aleatorios y elimina los elementos seleccionados.
-rnd_select(_, 0, []).  % Caso base: si N es 0, la lista resultante es vacía.
-rnd_select(L, N, [X|R]) :- 
-    length(L, Len),            % Obtiene la longitud de la lista.
-    random(1, Len + 1, I),     % Genera un índice aleatorio entre 1 y Len.
-    element_at(X, L, I),       % Obtiene el elemento en la posición I de la lista.
-    delete(L, X, L1),          % Elimina el elemento seleccionado de la lista.
-    N1 is N - 1,               % Decrementa N.
-    rnd_select(L1, N1, R).     % Llama recursivamente para seleccionar el resto.
+rnd_select(_, 0, [], _).  % Caso base: si N es 0, la lista resultante es vacía.
+rnd_select(L, N, [X|R], MaxIndex) :- 
+    random(1, MaxIndex, I), % Genera un índice aleatorio entre 1 y MaxIndex.
+    element_at(X, L, I),      % Obtiene el elemento en la posición I de la lista.
+    delete(L, X, L1),         % Elimina el elemento seleccionado de la lista.
+    N1 is N - 1,              % Decrementa N.
+    rnd_select(L1, N1, R, MaxIndex). % Llama recursivamente para seleccionar el resto.
 
 % Obtiene el elemento en la posición I de la lista (1-indexed).
 element_at(X, [X|_], 1).  % Si I es 1, el primer elemento es X.
