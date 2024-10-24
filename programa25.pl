@@ -47,9 +47,9 @@
 
 % Genera una permutación aleatoria de los elementos de una lista.
 % Utiliza la selección aleatoria para construir la permutación.
-
 programa25(L, P) :- 
     length(L, Len),     % Obtiene la longitud de la lista.
+    Len > 0,            % Asegura que la lista no esté vacía.
     rnd_select(L, Len, P). % Selecciona todos los elementos de la lista aleatoriamente.
 
 % Extrae un número dado de elementos aleatorios de una lista.
@@ -57,18 +57,18 @@ programa25(L, P) :-
 rnd_select(_, 0, []).  % Caso base: si N es 0, la lista resultante es vacía.
 rnd_select(L, N, [X|R]) :- 
     length(L, Len),            % Obtiene la longitud de la lista.
-    random(1, Len, I),         % Genera un índice aleatorio entre 1 y Len.
+    random(1, Len + 1, I),     % Genera un índice aleatorio entre 1 y Len.
     element_at(X, L, I),       % Obtiene el elemento en la posición I de la lista.
     delete(L, X, L1),          % Elimina el elemento seleccionado de la lista.
     N1 is N - 1,               % Decrementa N.
     rnd_select(L1, N1, R).     % Llama recursivamente para seleccionar el resto.
 
-% Obtiene el elemento en la posición I de la lista L.
-element_at(X, [X|_], 1).  % Si el índice es 1, el primer elemento es X.
-element_at(X, [_|T], I) :- 
-    I > 1,                    % Asegúrate de que I sea mayor que 1.
-    I1 is I - 1,              % Decrementa I.
-    element_at(X, T, I1).     % Busca recursivamente en la cola de la lista.
+% Obtiene el elemento en la posición I de la lista (1-indexed).
+element_at(X, [X|_], 1).  % Si I es 1, el primer elemento es X.
+element_at(X, [_|T], I) :-  % Si I no es 1, busca en el resto de la lista.
+    I > 1, 
+    I1 is I - 1, 
+    element_at(X, T, I1).
 
 % Ejemplo de uso:
 % ?- programa25([1, 2, 3, 4, 5], P).
