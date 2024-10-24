@@ -81,10 +81,10 @@ rnd_select(_, 0, []).  % Caso base: si N es 0, la lista resultante es vacía.
 rnd_select(L, N, [X|R]) :- 
     length(L, Len),            % Obtiene la longitud de la lista.
     random(1, Len, I),         % Genera un índice aleatorio entre 1 y Len.
-    element_at(X, L, I),       % Obtiene el elemento en la posición I de la lista.
+    nth1(I, L, X),             % Obtiene el elemento en la posición I de la lista.
     delete(L, X, L1),          % Elimina el elemento seleccionado de la lista.
     N1 is N - 1,               % Decrementa N.
-    rnd_select(L1, N1, R).     % Llama recursivamente para seleccionar el resto.
+    rnd_select(L1, N1, R).     % Llama recursivamente para seleccionar el resto..
 
 % Ejemplo de uso:
 % ?- programa24(6, 49, L).
