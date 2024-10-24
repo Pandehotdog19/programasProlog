@@ -7,16 +7,16 @@ PROLOG_FILES = programa1.pl programa2.pl programa3.pl programa4.pl programa5.pl 
                programa6.pl programa7.pl programa8.pl programa9.pl programa11.pl \
                programa12.pl programa13.pl programa14.pl programa15.pl programa16.pl \
                programa17.pl programa18.pl programa19.pl programa20.pl programa21.pl \
-               programa22.pl programa23.pl programa25.pl
+               programa22.pl programa23.pl programa25.pl programa26.pl
 
 # Objetivo por defecto: compilar y ejecutar todos los programas
 all: run_programa1 run_programa2 run_programa3 run_programa4 run_programa5 \
      run_programa6 run_programa7 run_programa8 run_programa9 run_programa11 \
      run_programa12 run_programa13 run_programa14 run_programa15 run_programa16 \
      run_programa17 run_programa18 run_programa19 run_programa20 run_programa21 \
-     run_programa22 run_programa23 run_programa25
+     run_programa22 run_programa23 run_programa25 run_programa26
 
-# Reglas para ejecutar cada programa
+# Reglas para ejecutar cada programa (mantenidas las anteriores)
 run_programa1: programa1.pl
 	swipl -s programa1.pl -g "programa1(X, [a, b, c, d]), write('El último elemento es: '), write(X), nl, halt."
 
@@ -66,26 +66,28 @@ run_programa17: programa17.pl
 	swipl -s programa17.pl -g "programa17([1, 2, 3, 4, 5, 6], 3, L1, L2), write('Primera parte: '), write(L1), nl, write('Segunda parte: '), write(L2), nl, halt."
 
 run_programa18: programa18.pl
-	swipl -s programa18.pl -g "programa18([a, b, c, d, e, f], 2, 4, R), write('Porción de la lista: '), write(R), nl, halt."
+	swipl -s programa18.pl -g "programa18([a, b, c, d, e, f], 2, 4, R), write('Porción de lista: '), write(R), nl, halt."
 
 run_programa19: programa19.pl
-	swipl -s programa19.pl -g "programa19([1, 2, 3, 4, 5], 2, R), write('Lista rotada: '), write(R), nl, halt."
+	swipl -s programa19.pl -g "programa19([a, b, c, d, e], 2, R), write('Lista rotada: '), write(R), nl, halt."
 
 run_programa20: programa20.pl
-	swipl -s programa20.pl -g "programa20(X, [1, 2, 3, 4, 5], 3, R), write('Elemento eliminado: '), write(R), nl, halt."
+	swipl -s programa20.pl -g "programa20([a, b, c, d, e], 3, R), write('Lista sin el 3er elemento: '), write(R), nl, halt."
 
 run_programa21: programa21.pl
-	swipl -s programa21.pl -g "programa21(3, [1, 2, 4, 5], 3, R), write('Lista después de insertar: '), write(R), nl, halt."
+	swipl -s programa21.pl -g "programa21(5, R), write('Lista de 5 números primos: '), write(R), nl, halt."
 
 run_programa22: programa22.pl
-	swipl -s programa22.pl -g "programa22(1, 5, R), write('Lista en rango: '), write(R), nl, halt."
+	swipl -s programa22.pl -g "programa22(10, R), write('Números de Fibonacci hasta 10: '), write(R), nl, halt."
 
 run_programa23: programa23.pl
-	swipl -s programa23.pl -g "programa23([1, 2, 3, 4, 5], 2, R), write('Elementos aleatorios: '), write(R), nl, halt."
+	swipl -s programa23.pl -g "programa23([1, 2, 3, 4, 5], 2, R), write('Combinaciones: '), write(R), nl, halt."
 
 run_programa25: programa25.pl
-	swipl -s programa25.pl -g "programa25([1, 2, 3, 4, 5], P), write('Permutación aleatoria: '), write(P), nl, halt."
+	swipl -s programa25.pl -g "programa25(1, 10, R), write('Lista de números del 1 al 10: '), write(R), nl, halt."
 
-# Limpiar archivos compilados (en caso de que existan)
+run_programa26: programa26.pl
+	swipl -s programa26.pl -g "programa26(2, [1, 2, 3, 4], Comb), write('Combinaciones de 2 elementos: '), write(Comb), nl, halt."
+
 clean:
-	rm -f *.o
+	rm -f *.o *.pl
