@@ -72,26 +72,25 @@
 % }
 % ----------------------------------------------
 
-% -------- Código en Prolog --------------------
+
+% combination(N, List, Comb) - Encuentra una combinación de tamaño N en la lista List.
+combination(0, _, []).  % Caso base: una combinación de tamaño 0 es la lista vacía.
+combination(N, [H|T], [H|Comb]) :- 
+    N > 0, 
+    N1 is N - 1, 
+    combination(N1, T, Comb).  % Incluye H en la combinación.
+combination(N, [_|T], Comb) :- 
+    N > 0, 
+    combination(N, T, Comb).  % No incluye H en la combinación.
 
 % Agrupa los elementos de un conjunto en subconjuntos disjuntos dados los tamaños de los subgrupos.
 programa27([], [], []).  % Caso base: no hay elementos ni tamaños.
 programa27([N|Ns], Es, [G|Gs]) :- 
     combination(N, Es, G),           % Obtiene una combinación de tamaño N.
     subtract(Es, G, Rest),           % Resta los elementos seleccionados de la lista original.
-    programa27(Ns, Rest, Gs).              % Llama recursivamente para los siguientes tamaños.
+    programa27(Ns, Rest, Gs).        % Llama recursivamente para los siguientes tamaños.
 
 % Ejemplo de uso:
 % ?- programa27([2, 3], [1, 2, 3, 4, 5], Gs).
 % Gs = [[1, 2], [3, 4, 5]] ; 
 % Gs = [[1, 3], [2, 4, 5]] ; 
-% Gs = [[1, 4], [2, 3, 5]] ; 
-% Gs = [[1, 5], [2, 3, 4]] ; 
-% Gs = [[2, 3], [1, 4, 5]] ; 
-% Gs = [[2, 4], [1, 3, 5]] ; 
-% Gs = [[2, 5], [1, 3, 4]] ; 
-% Gs = [[3, 4], [1, 2, 5]] ; 
-% Gs = [[3, 5], [1, 2, 4]] ; 
-% Gs = [[4, 5], [1, 2, 3]] ; 
-% false.
-% ----------------------------------------------
