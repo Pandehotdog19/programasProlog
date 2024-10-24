@@ -1,92 +1,51 @@
 % ===============================================
 % Autor: Jesus Gonzalez
 % Fecha: 21 de octubre de 2024
-% Descripción: Programa en Prolog que extrae N números
-%              aleatorios de un rango dado.
-%              Incluye una versión comentada en C#.
+% Descripción: Programa en Prolog que genera números aleatorios
+%              en un rango dado. Incluye una versión comentada en C#.
 % ===============================================
 
 % -------- Código en C# (comentado) ------------
 % using System;
 % using System.Collections.Generic;
 % using System.Linq;
-% 
+
 % class Program
 % {
-%     // Función que genera una lista de números en un rango.
-%     static List<int> Range(int start, int end)
+%     static void Main(string[] args)
 %     {
-%         List<int> rangeList = new List<int>();
-%         for (int i = start; i <= end; i++)
-%         {
-%             rangeList.Add(i); // Añade cada número al rango.
-%         }
-%         return rangeList; // Retorna la lista de números.
-%     }
-% 
-%     // Función que extrae N elementos aleatorios de una lista.
-%     static List<T> RandomSelect<T>(List<T> list, int n)
-%     {
-%         Random random = new Random(); // Crea un generador de números aleatorios.
-%         List<T> selected = new List<T>(); // Lista para almacenar los elementos seleccionados.
-%         List<T> tempList = new List<T>(list); // Copia la lista original.
-% 
-%         for (int i = 0; i < n; i++) // Repite N veces.
-%         {
-%             if (tempList.Count == 0) break; // Sale si la lista está vacía.
-%             
-%             int index = random.Next(tempList.Count); // Selecciona un índice aleatorio.
-%             selected.Add(tempList[index]); // Añade el elemento seleccionado a la lista de resultados.
-%             tempList.RemoveAt(index); // Elimina el elemento seleccionado de la lista temporal.
-%         }
-% 
-%         return selected; // Retorna la lista de elementos seleccionados.
-%     }
-% 
-%     // Función principal que genera N números aleatorios de un rango.
-%     static void Main()
-%     {
-%         int N = 6; // Cantidad de números aleatorios a extraer.
-%         int M = 49; // Límite superior del rango.
-%         List<int> rango = Range(1, M); // Genera una lista de números del 1 al M.
-%         List<int> seleccionados = RandomSelect(rango, N); // Extrae N elementos aleatorios.
+%         int min = 1; // Valor mínimo del rango
+%         int max = 5; // Valor máximo del rango
+%         int n = max - min + 1; // Tamaño del rango
 %         
-%         Console.WriteLine(string.Join(", ", seleccionados)); // Muestra los números seleccionados.
+%         Random random = new Random();
+%         List<int> result = new List<int>();
+%         for (int i = 0; i < n; i++)
+%         {
+%             // Genera un número aleatorio en el rango y lo añade a la lista
+%             int randomNumber = random.Next(min, max + 1);
+%             result.Add(randomNumber);
+%         }
+%         
+%         Console.WriteLine("Números aleatorios en rango: " + string.Join(", ", result));
 %     }
 % }
 % ----------------------------------------------
 
-% -------- Código en Prolog --------------------
+% Obtiene el elemento en la posición I de la lista L.
+element_at(X, [X|_], 1). % Si la posición es 1, el primer elemento es X.
+element_at(X, [_|T], I) :- 
+    I > 1, 
+    I1 is I - 1, 
+    element_at(X, T, I1). % Recurre en la cola de la lista con posición decreciente.
 
-% Extrae N números aleatorios de un rango dado.
-% Utiliza la función range para generar la lista de números
-% y luego selecciona aleatoriamente.
-
-programa24(N, M, L) :- 
-    range(1, M, R),    % Genera una lista de números del 1 al M.
-    rnd_select(R, N, L). % Selecciona N elementos aleatorios de la lista R.
-
-% Crea una lista con todos los enteros dentro de un rango dado.
-% Caso base: cuando el inicio y el final son iguales.
-range(I, I, [I]).
-% Caso recursivo: agrega el inicio a la lista y continúa con el siguiente número.
-range(I, K, [I|R]) :- 
-    I < K, 
-    I1 is I + 1, 
-    range(I1, K, R).
-
-% Extrae un número dado de elementos aleatorios de una lista.
-% Utiliza un generador de números aleatorios y elimina los elementos seleccionados.
-rnd_select(_, 0, []).  % Caso base: si N es 0, la lista resultante es vacía.
-rnd_select(L, N, [X|R]) :- 
-    length(L, Len),            % Obtiene la longitud de la lista.
-    random(1, Len, I),         % Genera un índice aleatorio entre 1 y Len.
-    element_at(X, L, I),       % Obtiene el elemento en la posición I de la lista.
-    delete(L, X, L1),          % Elimina el elemento seleccionado de la lista.
-    N1 is N - 1,               % Decrementa N.
-    rnd_select(L1, N1, R).     % Llama recursivamente para seleccionar el resto.
+% Genera N números aleatorios en un rango dado [Min, Max].
+programa24(Min, Max, R) :- 
+    N is Max - Min + 1,              % Calcula el tamaño del rango.
+    findall(X, (between(Min, Max, X)), Lista), % Genera una lista de números en el rango.
+    rnd_select(Lista, N, R).         % Selecciona N elementos aleatorios de la lista.
 
 % Ejemplo de uso:
-% ?- programa24(6, 49, L).
-% L = [X1, X2, X3, X4, X5, X6].  (donde X1, X2, ..., X6 son números aleatorios del 1 al 49).
+% ?- programa24(1, 5, R).
+% R = [X1, X2].  (donde X1 y X2 son números aleatorios en el rango).
 % ----------------------------------------------
