@@ -39,14 +39,17 @@
 % -------- Código en Prolog --------------------
 
 % Verifica si un número es primo
-es_primo(2).
-es_primo(N) :-
+es_primo(2).  % 2 es primo
+es_primo(N) :- 
     N > 2,
-    \+ (between(2, sqrt(N), X), N mod X =:= 0).
+    UpperLimit is floor(sqrt(N)),  % Calcula el límite superior como un entero
+    \+ (between(2, UpperLimit, X), N mod X =:= 0).  % Verifica si N es divisible por algún número entre 2 y UpperLimit
 
-programa30(N) :-
-    (es_primo(N) ->
-        write('Es primo: true');
+% Punto de entrada para el programa
+programa30(N) :- 
+    (es_primo(N) -> 
+        write('Es primo: true')
+    ; 
         write('Es primo: false')
     ).
 
