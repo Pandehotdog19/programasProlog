@@ -4,19 +4,19 @@
 
 # Lista de programas Prolog
 PROLOG_FILES = programa1.pl programa2.pl programa3.pl programa4.pl programa5.pl \
-               programa6.pl programa7.pl programa8.pl programa9.pl programa11.pl \
-               programa12.pl programa13.pl programa14.pl programa15.pl programa16.pl \
-               programa17.pl programa18.pl programa19.pl programa20.pl programa21.pl \
-               programa22.pl programa23.pl programa25.pl programa26.pl programa27.pl \
-               programa28.pl programa29.pl programa30.pl  # Agregado programa30
+               programa6.pl programa7.pl programa8.pl programa9.pl programa10.pl \
+               programa11.pl programa12.pl programa13.pl programa14.pl programa15.pl \
+               programa16.pl programa17.pl programa18.pl programa19.pl programa20.pl \
+               programa21.pl programa22.pl programa23.pl programa25.pl programa26.pl \
+               programa27.pl programa28.pl programa29.pl programa30.pl  # Agregado programa30
 
 # Objetivo por defecto: compilar y ejecutar todos los programas
 all: run_programa1 run_programa2 run_programa3 run_programa4 run_programa5 \
-     run_programa6 run_programa7 run_programa8 run_programa9 run_programa11 \
-     run_programa12 run_programa13 run_programa14 run_programa15 run_programa16 \
-     run_programa17 run_programa18 run_programa19 run_programa20 run_programa21 \
-     run_programa22 run_programa23 run_programa25 run_programa26 run_programa27 \
-     run_programa28 run_programa29 run_programa30  # Agregado run_programa30
+     run_programa6 run_programa7 run_programa8 run_programa9 run_programa10 \
+     run_programa11 run_programa12 run_programa13 run_programa14 run_programa15 \
+     run_programa16 run_programa17 run_programa18 run_programa19 run_programa20 \
+     run_programa21 run_programa22 run_programa23 run_programa25 run_programa26 \
+     run_programa27 run_programa28 run_programa29 run_programa30  # Agregado run_programa10
 
 # Reglas para ejecutar cada programa
 run_programa1: programa1.pl
@@ -45,6 +45,9 @@ run_programa8: programa8.pl
 
 run_programa9: programa9.pl
 	swipl -s programa9.pl -g "programa9([a, a, b, b, c, a, a, d], R), write('Lista agrupada: '), write(R), nl, halt."
+
+run_programa10: programa10.pl
+	swipl -s programa10.pl -g "programa10([a, a, b, b, c, a, a, d], R), write('Lista codificada: '), write(R), nl, halt."
 
 run_programa11: programa11.pl
 	swipl -s programa11.pl -g "programa11([a, a, b, c, c, a, d], R), write('Lista modificada: '), write(R), nl, halt."
