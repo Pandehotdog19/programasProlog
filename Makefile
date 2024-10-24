@@ -8,7 +8,7 @@ PROLOG_FILES = programa1.pl programa2.pl programa3.pl programa4.pl programa5.pl 
                programa12.pl programa13.pl programa14.pl programa15.pl programa16.pl \
                programa17.pl programa18.pl programa19.pl programa20.pl programa21.pl \
                programa22.pl programa23.pl programa25.pl programa26.pl programa27.pl \
-               programa28.pl programa29.pl  # Agregado programa29
+               programa28.pl programa29.pl programa30.pl  # Agregado programa30
 
 # Objetivo por defecto: compilar y ejecutar todos los programas
 all: run_programa1 run_programa2 run_programa3 run_programa4 run_programa5 \
@@ -16,7 +16,7 @@ all: run_programa1 run_programa2 run_programa3 run_programa4 run_programa5 \
      run_programa12 run_programa13 run_programa14 run_programa15 run_programa16 \
      run_programa17 run_programa18 run_programa19 run_programa20 run_programa21 \
      run_programa22 run_programa23 run_programa25 run_programa26 run_programa27 \
-     run_programa28 run_programa29  # Agregado run_programa29
+     run_programa28 run_programa29 run_programa30  # Agregado run_programa30
 
 # Reglas para ejecutar cada programa
 run_programa1: programa1.pl
@@ -99,6 +99,9 @@ run_programa28: programa28.pl
 
 run_programa29: programa29.pl
 	swipl -s programa29.pl -g "programa29([[1, 2], [1, 2, 3, 4], [1], [1, 2, 3]], F), write('Frecuencia de longitudes: '), write(F), nl, halt."
+
+run_programa30: programa30.pl
+	swipl -s programa30.pl -g "programa30(29), write('Es primo: true'), nl, halt."  # Ejemplo de uso del programa30
 
 # Limpiar archivos compilados (en caso de que existan)
 clean:
