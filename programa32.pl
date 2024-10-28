@@ -1,3 +1,5 @@
+:- module(programa32, [programa32/2]).
+
 % ===============================================
 % Autor: Jesus Gonzalez
 % Fecha: 21 de octubre de 2024
@@ -37,9 +39,12 @@
 % ----------------------------------------------
 
 % -------- Código en Prolog --------------------
-
 % Dos números son coprimos si su máximo común divisor es 1.
 programa32(X, Y) :- gcd(X, Y, 1).  % Verifica si el MCD de X e Y es 1.
+
+% Implementación del algoritmo de Euclides para calcular el MCD.
+gcd(A, 0, A).  % Si b es 0, el MCD es A.
+gcd(A, B, D) :- B > 0, R is A mod B, gcd(B, R, D).  % Llama recursivamente.
 
 % Ejemplo de uso:
 % ?- programa32(15, 28).  % Debería devolver true.
