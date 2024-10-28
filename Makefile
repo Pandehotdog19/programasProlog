@@ -9,7 +9,7 @@ PROLOG_FILES = programa1.pl programa2.pl programa3.pl programa4.pl programa5.pl 
                programa16.pl programa17.pl programa18.pl programa19.pl programa20.pl \
                programa21.pl programa22.pl programa23.pl programa24.pl programa25.pl \
                programa26.pl programa27.pl programa28.pl programa29.pl programa30.pl \
-               programa31.pl programa32.pl programa33.pl  # Agregado programa33
+               programa31.pl programa32.pl programa33.pl programa34.pl  # Agregado programa34
 
 # Objetivo por defecto: compilar y ejecutar todos los programas
 all: run_programa1 run_programa2 run_programa3 run_programa4 run_programa5 \
@@ -18,7 +18,7 @@ all: run_programa1 run_programa2 run_programa3 run_programa4 run_programa5 \
      run_programa16 run_programa17 run_programa18 run_programa19 run_programa20 \
      run_programa21 run_programa22 run_programa23 run_programa24 run_programa25 \
      run_programa26 run_programa27 run_programa28 run_programa29 run_programa30 \
-     run_programa31 run_programa32 run_programa33
+     run_programa31 run_programa32 run_programa33 run_programa34
 
 # Reglas para ejecutar cada programa
 run_programa1: programa1.pl
@@ -121,6 +121,9 @@ run_programa32: programa32.pl
 # Regla para ejecutar programa33
 run_programa33: programa33.pl
 	swipl -s programa33.pl -g "programa33(10, Phi), write('El totiente de 10 es: '), write(Phi), nl, halt."
+
+run_programa34: programa34.pl
+	swipl -s programa34.pl -g "programa34(60, L), write('Los factores primos son: '), write(L), nl, halt."
 
 clean:
 	rm -f *.log *.out *.swp
