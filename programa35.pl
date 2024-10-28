@@ -71,7 +71,7 @@ es_primo(N) :-
     \+ (between(2, DivMax, X), N mod X =:= 0).
 
 % Factoriza un número N y devuelve sus factores primos con multiplicidad en una lista
-factorizar(N, L) :-
+factorizar(N, L) :- 
     factorizar(N, 2, L).
 
 factorizar(1, []) :- !. % Caso base: no hay factores en 1
@@ -80,16 +80,22 @@ factorizar(N, F, [F|L]) :-
     N1 is N // F, 
     factorizar(N1, F, L). % Si F es un factor, continúa factorizando
 factorizar(N, F, L) :- 
-    F < N, % Asegúrate de que F sea menor que N
+    F * F =< N, % Asegúrate de que F no exceda la raíz cuadrada de N
     (es_primo(F) -> 
         factorizar(N, F + 1, L) ; % Si F es primo, incrementa
         factorizar(N, F + 1, L) % Si no, intenta con el siguiente número
     ).
 
+factorizar(N, F, L) :- 
+    F * F > N, 
+    N > 1, 
+    L = [N]. % Agrega el último factor primo
+
 % Interfaz pública para ejecutar el programa
 programa35(N, L) :-
     N > 1, 
     factorizar(N, L).
+    
 % Ejemplo de uso:
 % ?- programa35(60, L).  % Debería devolver L = [[2, 2], [3, 1], [5, 1]].
 % ----------------------------------------------
