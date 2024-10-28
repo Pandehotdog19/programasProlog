@@ -50,14 +50,16 @@
 
 % -------- Código en Prolog --------------------
 
-% Calcula la función totiente de Euler, que cuenta cuántos números menores que M son coprimos con M.
-programa33(1, 1).  % Caso base: el totiente de 1 es 1.
-programa33(M, Phi) :- M > 1, totient_acc(M, M, 0, Phi).  % Inicia el cálculo para M > 1.
+% Calcula el máximo común divisor usando el algoritmo de Euclides.
+gcd(A, 0, A) :- A > 0, !.
+gcd(A, B, GCD) :-
+    B > 0,
+    R is A mod B,
+    gcd(B, R, GCD).
 
-% Acumulador para calcular el totiente.
-totient_acc(_, 0, Acc, Acc).  % Caso base del acumulador: si K es 0, devuelve el acumulador.
-totient_acc(M, K, Acc, Phi) :- K > 0, coprime(M, K), Acc1 is Acc + 1, K1 is K - 1, totient_acc(M, K1, Acc1, Phi).
-totient_acc(M, K, Acc, Phi) :- K > 0, \\+ coprime(M, K), K1 is K - 1, totient_acc(M, K1, Acc, Phi).  % Continúa sin contar si no es coprimo.
+% Verifica si dos números son coprimos.
+coprime(X, Y) :-
+    gcd(X, Y, 1).
 
 % Ejemplo de uso:
 % ?- programa33(10, Phi).  % Debería devolver Phi = 4.
