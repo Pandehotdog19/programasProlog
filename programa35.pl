@@ -65,7 +65,10 @@
 
 % Determina si un número es primo
 es_primo(2).
-es_primo(N) :- N > 2, \+ (between(2, sqrt(N), X), N mod X =:= 0).
+es_primo(N) :- 
+    N > 2, 
+    \+ (between(2, DivMax, X), N mod X =:= 0),
+    DivMax is floor(sqrt(N)). % Calcula el máximo divisor entero
 
 % Factoriza un número N y devuelve sus factores primos con multiplicidad en una lista
 factorizar(N, L) :- factorizar(N, 2, L).
@@ -78,32 +81,6 @@ factorizar(N, F, [F|L]) :-
 factorizar(N, F, L) :- 
     F1 is F + 1, 
     (es_primo(F1) -> factorizar(N, F1, L) ; factorizar(N, F1, L)). % Incrementa F y continúa
-
-% Interfaz pública
-programa35(N, L) :- 
-    factorizar(N, L1), 
-    contar_multiplicidades(L1, L).
-
-% Cuenta la multiplicidad de los factores
-contar_multiplicidades(List, L) :- 
-    encontrar_multiplicidades(List, [], L).
-
-encontrar_multiplicidades([], Acc, Acc).
-encontrar_multiplicidades([H|T], Acc, L) :- 
-    contar(H, [H|T], Count),
-    restar(H, T, Rest),
-    encontrar_multiplicidades(Rest, [(H, Count)|Acc], L).
-
-contar(X, List, Count) :- 
-    include(==(X), List, SubList),
-    length(SubList, Count).
-
-restar(_, [], []).
-restar(X, [X|T], R) :- 
-    restar(X, T, R).
-restar(X, [Y|T], [Y|R]) :- 
-    X \= Y, 
-    restar(X, T, R).
 
 % Ejemplo de uso:
 % ?- programa35(60, L).  % Debería devolver L = [[2, 2], [3, 1], [5, 1]].
