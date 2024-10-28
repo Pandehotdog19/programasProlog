@@ -50,21 +50,21 @@
 
 % -------- Código en Prolog --------------------
 
-% Encuentra los factores primos de un número entero positivo.
-programa34(N, L) :- N > 1, programa34(N, 2, L).
+% programa34(N, L): donde N es el número de entrada y L es la lista de factores primos
+programa34(N, L) :- prime_factors(N, L).
 
-% Caso base: si N es 1, no hay factores primos.
-programa34(1, _, []).
+% Definición de prime_factors/2 para calcular los factores primos
+prime_factors(1, []) :- !.
+prime_factors(N, [F | L]) :-
+    N > 1,
+    smallest_factor(N, F),
+    N1 is N // F,
+    prime_factors(N1, L).
 
-% Si N es divisible por F, agrega F a la lista y continúa con el resto.
-programa34(N, F, [F|L]) :- N > 1, 0 is N mod F, N1 is N // F, programa34(N1, F, L).
-
-% Si F es menor que la raíz cuadrada de N, busca el siguiente factor.
-programa34(N, F, L) :- N > 1, F * F < N, next_factor(F, F1), programa34(N, F1, L).
-
-% Genera el siguiente factor primo.
-next_factor(2, 3).
-next_factor(F, F1) :- F > 2, F1 is F + 2.
+% smallest_factor/2 encuentra el factor primo más pequeño de N
+smallest_factor(N, F) :-
+    between(2, N, F),
+    N mod F =:= 0, !.
 
 % Ejemplo de uso:
 % ?- programa34(60, L).  % Debería devolver L = [2, 2, 3, 5].
