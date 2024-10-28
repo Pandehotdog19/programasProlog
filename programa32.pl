@@ -38,8 +38,16 @@
 
 % -------- Código en Prolog --------------------
 
-% Dos números son coprimos si su máximo común divisor es 1.
-programa32(X, Y) :- gcd(X, Y, 1).  % Verifica si el MCD de X e Y es 1.
+
+% combinación/3 genera todas las combinaciones de K elementos de una lista.
+programa32(0, _, []).
+programa32(K, [H|T], [H|R]) :-
+    K > 0,
+    K1 is K - 1,
+    programa32(K1, T, R).
+programa32(K, [_|T], R) :-
+    K > 0,
+    programa32(K, T, R).
 
 % Ejemplo de uso:
 % ?- programa32(15, 28).  % Debería devolver true.
