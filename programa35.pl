@@ -63,27 +63,47 @@
 
 % -------- Código en Prolog --------------------
 
-% Determina los factores primos con su multiplicidad.
-programa35(N, L) :- prime_factors(N, F), encode(F, L).
+% Determina si un número es primo
+es_primo(2).
+es_primo(N) :- N > 2, \+ (between(2, sqrt(N), X), N mod X =:= 0).
 
-% Encuentra los factores primos de un número entero positivo.
-prime_factors(N, L) :- N > 1, prime_factors(N, 2, L).
+% Factoriza un número N y devuelve sus factores primos con multiplicidad en una lista
+factorizar(N, L) :- factorizar(N, 2, L).
 
-prime_factors(1, _, []).
-prime_factors(N, F, [F|L]) :- N > 1, 0 is N mod F, N1 is N // F, prime_factors(N1, F, L).
-prime_factors(N, F, L) :- N > 1, F * F < N, next_factor(F, F1), prime_factors(N, F1, L).
+factorizar(1, _, []) :- !. % Base case: no hay factores en 1
+factorizar(N, F, [F|L]) :- 
+    N mod F =:= 0, 
+    N1 is N // F, 
+    factorizar(N1, F, L). % Si F es un factor, continúa factorizando N1
+factorizar(N, F, L) :- 
+    F1 is F + 1, 
+    (es_primo(F1) -> factorizar(N, F1, L) ; factorizar(N, F1, L)). % Incrementa F y continúa
 
-next_factor(2, 3).
-next_factor(F, F1) :- F > 2, F1 is F + 2.
+% Interfaz pública
+programa35(N, L) :- 
+    factorizar(N, L1), 
+    contar_multiplicidades(L1, L).
 
-% Codifica la lista de factores para obtener su multiplicidad.
-encode([], []).
-encode([X|Xs], [[N, X]|R]) :- count(X, [X|Xs], N, Rest), encode(Rest, R).
+% Cuenta la multiplicidad de los factores
+contar_multiplicidades(List, L) :- 
+    encontrar_multiplicidades(List, [], L).
 
-% Cuenta cuántos elementos consecutivos son iguales.
-count(_, [], 0, []).
-count(X, [X|Xs], N, Rest) :- count(X, Xs, N1, Rest), N is N1 + 1.
-count(X, [Y|Ys], 0, [Y|Ys]) :- X \= Y.
+encontrar_multiplicidades([], Acc, Acc).
+encontrar_multiplicidades([H|T], Acc, L) :- 
+    contar(H, [H|T], Count),
+    restar(H, T, Rest),
+    encontrar_multiplicidades(Rest, [(H, Count)|Acc], L).
+
+contar(X, List, Count) :- 
+    include(==(X), List, SubList),
+    length(SubList, Count).
+
+restar(_, [], []).
+restar(X, [X|T], R) :- 
+    restar(X, T, R).
+restar(X, [Y|T], [Y|R]) :- 
+    X \= Y, 
+    restar(X, T, R).
 
 % Ejemplo de uso:
 % ?- programa35(60, L).  % Debería devolver L = [[2, 2], [3, 1], [5, 1]].
