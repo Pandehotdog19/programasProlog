@@ -61,6 +61,17 @@ gcd(A, B, GCD) :-
 coprime(X, Y) :-
     gcd(X, Y, 1).
 
+% Calcula la función totiente de Euler, que cuenta cuántos números menores que N son coprimos con N.
+totient(1, 1) :- !.
+totient(N, Phi) :-
+    N > 1,
+    findall(X, (between(1, N, X), coprime(N, X)), Coprimes),
+    length(Coprimes, Phi).
+
+% Para ejecutar el cálculo del totiente de un número dado
+programa33(N, Phi) :-
+    totient(N, Phi).
+
 % Ejemplo de uso:
 % ?- programa33(10, Phi).  % Debería devolver Phi = 4.
 % ----------------------------------------------
